@@ -1,8 +1,10 @@
 import { short } from '../lib/timeouts'
+import App from '../page-objects/App'
 
 describe('E2E Tests - Feedback Form Flow', () => {
     it('Should load feedback form', () => {
-        browser.url('http://zero.webappsecurity.com/index.html')
+        // browser.url('http://zero.webappsecurity.com/index.html')
+        App.openHomePage()
         const feedBackLink = $('#feedback')
         feedBackLink.waitForExist()
         feedBackLink.click()
