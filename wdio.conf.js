@@ -24,6 +24,7 @@ exports.config = {
         './tests/e2e.js',
         './tests/e2e-feedback.js',
         './tests/e2e-search.js',
+        './tests/e2e-exchange.js',
     ],
     //
     // ============
