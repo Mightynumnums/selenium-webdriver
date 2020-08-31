@@ -9,21 +9,12 @@ describe('E2E Tests - Feedback Form Flow', () => {
     })
 
     it('Should submit feedback form', () => {
-        const addName = FeedbackPage.name
-        FeedbackPage.formAddName('Aleks')
-
-        const addValidEmail = FeedbackPage.email
-        FeedbackPage.formAddEmail('test@test.com')
-
-        const addSubject = FeedbackPage.subject
-        FeedbackPage.formAddSubject('Test Subject Fluffs')
-
-        const addText = FeedbackPage.commentText
-        FeedbackPage.formAddText(
-            'This is a test text to test the comment feedback form.'
+        FeedbackPage.fillOutForm(
+            'Aleks',
+            'test@test.com',
+            'Test Subject',
+            'Sample test text to test the test!'
         )
-
-        const sendMessageButton = FeedbackPage.sendMessageButton
-        FeedbackPage.submitFeedbackForm()
+        FeedbackPage.submitForm()
     })
 })

@@ -53,6 +53,17 @@ class FeedbackPage extends Base {
         this.sendMessageButton.waitForExist()
         this.sendMessageButton.click()
     }
+
+    fillOutForm(name, email, subject, text) {
+        this.formAddName(name)
+        this.formAddEmail(email)
+        this.formAddSubject(subject)
+        this.formAddText(text)
+    }
+
+    submitForm() {
+        this.submitFeedbackForm()
+    }
 }
 
 export default new FeedbackPage()
