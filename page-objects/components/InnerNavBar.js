@@ -13,6 +13,10 @@ class InnerNavBar extends Base {
         return $('#ui-tabs-2')
     }
 
+    get payBillsTab() {
+        return $('#pay_bills_tab')
+    }
+
     clickFindTransactionsForm() {
         this.findTransactionsLink.waitForExist()
         this.findTransactionsLink.click()
@@ -26,6 +30,11 @@ class InnerNavBar extends Base {
     clickFiltersLink() {
         this.filtersLink.waitForExist()
         this.filtersLink.click()
+    }
+
+    selectPayBillsTab() {
+        this.payBillsTab.waitForExist()
+        this.payBillsTab.click()
     }
 }
 

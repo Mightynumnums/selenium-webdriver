@@ -2,6 +2,8 @@ import { short } from '../lib/timeouts'
 import App from '../page-objects/App'
 import LogInPage from '../page-objects/pages/LoginPage'
 import NavBar from '../page-objects/components/Navbar'
+import InnerNavBar from '../page-objects/components/InnerNavBar'
+import PaymentsPage from '../page-objects/pages/PaymentsPage'
 
 describe('E2E Tests - Currency Exchange', () => {
     it('Should log into application', () => {
@@ -11,47 +13,31 @@ describe('E2E Tests - Currency Exchange', () => {
     })
 
     it('Should make currency exchange', () => {
-        const payBillsButton = $('#pay_bills_tab')
-        payBillsButton.waitForExist()
-        payBillsButton.click()
+        InnerNavBar.selectPayBillsTab()
 
-        const purchaseFCurrencyButton = $('#tabs > ul > li:nth-child(3) > a')
-        purchaseFCurrencyButton.waitForExist()
-        purchaseFCurrencyButton.click()
-        browser.pause(short)
+        PaymentsPage.purchaseFCurrencyTab
+        PaymentsPage.selectPurchaseForCurrencyTab()
 
-        const currencySelect = $('#pc_currency')
-        currencySelect.waitForExist()
-        currencySelect.selectByAttribute('value', 'GBP')
+        PaymentsPage.currencySelect
+        PaymentsPage.selectCurrency('value', 'GBP')
 
-        const amount = $('#pc_amount')
-        amount.waitForExist()
-        amount.setValue('500')
-        browser.pause(short)
+        PaymentsPage.amount
+        PaymentsPage.selectAmount('500')
 
-        const usdradioButton = $(
-            '#pc_purchase_currency_form > div.board > div > article > fieldset > div:nth-child(3) > div > label:nth-child(3)'
-        )
-        usdradioButton.waitForExist()
-        usdradioButton.click()
-        browser.pause(short)
+        PaymentsPage.selectRadioButton
+        PaymentsPage.selectRadioButton()
 
-        const calculateButton = $('#pc_calculate_costs')
-        calculateButton.waitForExist()
-        calculateButton.click()
+        PaymentsPage.calculateExchangeValue()
 
-        const conversionAmountResult = $('#pc_conversion_amount')
-        conversionAmountResult.waitForExist()
+        const conversionAmountResult = PaymentsPage.conversionAmount
         expect(conversionAmountResult).toHaveText(
             '295.12 pound (GBP) = 500.00 U.S. dollar (USD)'
         )
 
-        const purchaseButton = $('#purchase_cash')
-        purchaseButton.waitForExist()
-        purchaseButton.click()
+        PaymentsPage.clickPurchaseButton()
 
-        const successMessage = $('#alert_content')
-        successMessage.waitForExist()
+        const successMessage = PaymentsPage.successMessage
+        PaymentsPage.successMessageExist()
         expect(successMessage).toHaveText(
             'Foreign currency cash was successfully purchased.'
         )
