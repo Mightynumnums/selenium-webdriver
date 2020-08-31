@@ -1,26 +1,12 @@
 import { short } from '../lib/timeouts'
+import App from '../page-objects/App'
+import LogInPage from '../page-objects/pages/LoginPage'
+import NavBar from '../page-objects/components/Navbar'
 
 describe('E2E Tests - Account Activity - Find Transactions', () => {
     it('Should log into application', () => {
-        browser.url('http://zero.webappsecurity.com/index.html')
-        const signInButton = $('#signin_button')
-        signInButton.waitForExist()
-        signInButton.click()
-
-        const logInInput = $('#user_login')
-        logInInput.waitForExist()
-        logInInput.setValue('username')
-
-        const password = $('#user_password')
-        password.waitForExist()
-        password.setValue('password')
-
-        const signIn = $('input[type="submit"]')
-        signIn.waitForExist()
-        signIn.click()
-
-        const navTab = $('.nav-tabs')
-        navTab.waitForExist()
+        App.openLogInPage()
+        LogInPage.logIn('username', 'password')
     })
 
     it('Brings you to Account Activity Tab and selects Find Transactions Tab', () => {

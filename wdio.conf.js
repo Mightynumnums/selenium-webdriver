@@ -20,6 +20,7 @@ exports.config = {
     // Patterns to exclude.
     exclude: [
         './tests/example.js',
+        './tests/e2e-login.js',
         './tests/actions.js',
         './tests/e2e-search.js',
         './tests/e2e-exchange.js',

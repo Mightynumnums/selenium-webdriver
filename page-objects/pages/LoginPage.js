@@ -35,6 +35,19 @@ class LogInPage extends Base {
     submitForm() {
         this.submitButton.click()
     }
+
+    // logIn(username, password) {
+    //     this.logInForm.waitForExist()
+    //     this.userNameInput.setValue(username)
+    //     this.userNameInput.setValue(password)
+    //     this.submitButton.click()
+    // }
+
+    logIn(username, password) {
+        this.formIsVisible()
+        this.fillForm(username, password)
+        this.submitForm()
+    }
 }
 
 export default new LogInPage()
