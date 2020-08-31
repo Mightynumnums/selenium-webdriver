@@ -16,5 +16,6 @@ describe('E2E Tests - Feedback Form Flow', () => {
             'Sample test text to test the test!'
         )
         FeedbackPage.submitForm()
+        App.openFeedbackPage()
     })
 })

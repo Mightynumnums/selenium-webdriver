@@ -25,8 +25,8 @@ exports.config = {
         './tests/e2e-search.js',
         './tests/e2e-exchange.js',
         './tests/e2e-make-payments.js',
-        './tests/e2e-find-transactions.js',
-        // './tests/e2e-feedback.js',
+        // './tests/e2e-find-transactions.js',
+        './tests/e2e-feedback.js',
         './tests/e2e-help.js',
     ],
     //
