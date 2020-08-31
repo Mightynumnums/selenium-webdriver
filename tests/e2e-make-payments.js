@@ -2,6 +2,9 @@ import { short } from '../lib/timeouts'
 import App from '../page-objects/App'
 import LogInPage from '../page-objects/pages/LoginPage'
 import NavBar from '../page-objects/components/Navbar'
+import InnerNavBar from '../page-objects/components/InnerNavBar'
+import PaymentPagePay from '../page-objects/pages/PaymentsPage-Pay'
+import PaymentsPagePay from '../page-objects/pages/PaymentsPage-Pay'
 
 describe('E2E Tests - Make Payments', () => {
     it('Should log into application', () => {
@@ -11,45 +14,25 @@ describe('E2E Tests - Make Payments', () => {
     })
 
     it('Should Make Payments', () => {
-        const payBillsButton = $('#pay_bills_tab')
-        payBillsButton.waitForExist()
-        payBillsButton.click()
+        InnerNavBar.selectPayBillsTab()
 
-        const paySavedPayee = $('#tabs > ul > li:nth-child(1) > a')
+        PaymentsPagePay.paySavedPayeeTab
+        PaymentsPagePay.selectPaySavedPayeeTab()
 
-        paySavedPayee.waitForExist()
-        expect(paySavedPayee).toExist()
+        PaymentsPagePay.payee
+        PaymentsPagePay.makeSelectionForPayee('value', 'sprint')
 
-        const payee = $('#sp_payee')
-        payee.waitForExist()
-        payee.selectByAttribute('value', 'sprint')
+        const account = PaymentsPagePay.account
+        account.selectByVisibleText('Loan')
 
-        const account = $('#sp_account')
-        account.waitForExist()
-        account.selectByAttribute('value', '2')
-        //account.selectByVisibleText('Checking') //this will make it easier to read
+        PaymentsPagePay.fillForm('200', '2020-08-12', 'Rent')
 
-        const amount = $('#sp_amount')
-        amount.waitForExist()
-        amount.setValue('75')
+        PaymentsPagePay.submitForm()
 
-        const date = $('#sp_date')
-        date.waitForExist()
-        date.setValue('2020-08-12')
-
-        const description = $('#sp_description')
-        description.waitForExist()
-        description.setValue('Rent')
-
-        const payButton = $('#pay_saved_payees')
-        payButton.waitForExist()
-        payButton.click()
-
-        const successMessage = $('#alert_content')
+        const successMessage = PaymentsPagePay.successMessage
         successMessage.waitForExist()
         expect(successMessage).toHaveText(
             'The payment was successfully submitted.'
         )
-        browser.pause(short)
     })
 })

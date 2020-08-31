@@ -1,4 +1,3 @@
-import { short } from '../lib/timeouts'
 import App from '../page-objects/App'
 import NavBar from '../page-objects/components/Navbar'
 
