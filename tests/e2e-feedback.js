@@ -1,48 +1,29 @@
 import { short } from '../lib/timeouts'
 import App from '../page-objects/App'
+import FeedbackPage from '../page-objects/pages/FeedbackPage'
 
 describe('E2E Tests - Feedback Form Flow', () => {
-    it('Should load feedback form', () => {
-        App.openHomePage()
-        const feedBackLink = $('#feedback')
-        feedBackLink.waitForExist()
-        feedBackLink.click()
-        browser.pause(short)
-
-        const feedBackTitle = $('#feedback-title')
-        feedBackTitle.waitForExist()
-        expect(feedBackTitle).toHaveText('Feedback')
-        browser.pause(short)
+    it('Should load feedback page', () => {
+        App.openFeedbackPage()
+        FeedbackPage.formIsVisible()
     })
 
     it('Should submit feedback form', () => {
-        const addName = $('#name')
-        addName.waitForExist()
-        addName.setValue('Aleks Shineleva')
-        browser.pause(short)
+        const addName = FeedbackPage.name
+        FeedbackPage.formAddName('Aleks')
 
-        const addValidEmail = $('#email')
-        addValidEmail.waitForExist()
-        addValidEmail.setValue('testemail@test.com')
-        browser.pause(short)
+        const addValidEmail = FeedbackPage.email
+        FeedbackPage.formAddEmail('test@test.com')
 
-        const addSubject = $('#subject')
-        addSubject.waitForExist()
-        addSubject.setValue('Test this Test to Test')
-        browser.pause(short)
+        const addSubject = FeedbackPage.subject
+        FeedbackPage.formAddSubject('Test Subject Fluffs')
 
-        const addText = $('#comment')
-        addText.waitForExist()
-        addText.setValue('I dont have a question, I only have answers')
-        browser.pause(short)
-
-        const sendMessageButton = $('input[type="submit"]')
-        sendMessageButton.waitForExist()
-        sendMessageButton.click()
-        browser.pause(short)
-
-        expect(browser).toHaveUrl(
-            'http://zero.webappsecurity.com/sendFeedback.html'
+        const addText = FeedbackPage.commentText
+        FeedbackPage.formAddText(
+            'This is a test text to test the comment feedback form.'
         )
+
+        const sendMessageButton = FeedbackPage.sendMessageButton
+        FeedbackPage.submitFeedbackForm()
     })
 })

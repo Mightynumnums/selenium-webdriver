@@ -7,6 +7,10 @@ class App {
         browser.url('http://zero.webappsecurity.com/login.html')
     }
 
+    openFeedbackPage() {
+        browser.url('http://zero.webappsecurity.com/feedback.html')
+    }
+
     logOut() {
         browser.url('http://zero.webappsecurity.com/logout.html')
     }
